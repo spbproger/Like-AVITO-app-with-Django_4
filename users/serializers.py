@@ -21,6 +21,9 @@ class UserListSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+    def get_total_ads(self, user):
+        return user.ad_set.filter(is_published=True).count()
+    
 
 class UserDetailSerializer(serializers.ModelSerializer):
     location = serializers.SlugRelatedField(
